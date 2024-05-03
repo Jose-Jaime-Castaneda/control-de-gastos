@@ -5,6 +5,8 @@ function App() {
   const { state, dispatch } = useBudget();
 
   console.log(state);
+  console.log(dispatch);
+  
 
 
   return (
