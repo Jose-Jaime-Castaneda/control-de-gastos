@@ -1,3 +1,5 @@
+import { categories } from "../data/categories";
+
 export default function ExpenseForm() {
     return (
         <form className="space-y-5">
@@ -30,6 +32,33 @@ export default function ExpenseForm() {
                     className="bg-slate-100 p-2"
                     name="amount" />
             </div>
+
+            <div className="flex flex-col gap-2">
+                <label
+                    htmlFor="category"
+                    className="text-xl"
+                >Catgoria:</label>
+                <select
+                    id="category"
+                    className="bg-slate-100 p-2"
+                    name="category" >
+                    <option value="">-- Sleccione una categoria</option>
+                    {categories.map(category => (
+                        <option
+                            key={category.id}
+                            value={category.id}
+                        >
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <input
+                type="submit"
+                className="bg-blue-600 cursor-pointer w-full p-2 text-white uppercase font-bold rounded-lg"
+                value={'Registrat Gasto'}
+            />
         </form>
     )
 }
