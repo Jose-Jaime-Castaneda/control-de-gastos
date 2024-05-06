@@ -1,11 +1,43 @@
+import { useState } from "react";
 import { categories } from "../data/categories";
 import DatePicker from "react-date-picker";
 import 'react-calendar/dist/Calendar.css'
 import 'react-date-picker/dist/DatePicker.css'
+import { DraftExpense, Value } from "../types";
 
 export default function ExpenseForm() {
+    const [expense, setExpense] = useState<DraftExpense>({
+        amount: 0,
+        expenseName: '',
+        category: '',
+        date: new Date()
+    })
+    const [error, setError] = useState('')
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = e.target
+        const isAmountField = ['amount'].includes(name)
+        setExpense({ ...expense, [name]: isAmountField ? +value : value })
+    }
+
+    const handleChangeDate = (value: Value) => {
+        setExpense({ ...expense, date: value })
+    }
+
+    const hanldeSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        if (Object.values(expense).includes('')) {
+            setError('Todod los campos son obligatorios')
+            return
+        }
+
+        console.log('error');
+
+    }
+
     return (
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={hanldeSubmit}>
             <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2">
                 Nuevo Gasto
             </legend>
@@ -20,7 +52,9 @@ export default function ExpenseForm() {
                     id="expenseName"
                     placeholder="Añade el nombre del gasto"
                     className="bg-slate-100 p-2"
-                    name="expenseName" />
+                    name="expenseName"
+                    value={expense.expenseName}
+                    onChange={handleChange} />
             </div>
 
             <div className="flex flex-col gap-2">
@@ -33,7 +67,9 @@ export default function ExpenseForm() {
                     id="amount"
                     placeholder="Añade la cantidad del gasto"
                     className="bg-slate-100 p-2"
-                    name="amount" />
+                    name="amount"
+                    value={expense.amount}
+                    onChange={handleChange} />
             </div>
 
             <div className="flex flex-col gap-2">
@@ -44,7 +80,8 @@ export default function ExpenseForm() {
                 <select
                     id="category"
                     className="bg-slate-100 p-2"
-                    name="category" >
+                    name="category"
+                    onChange={handleChange}>
                     <option value="">-- Sleccione una categoria</option>
                     {categories.map(category => (
                         <option
@@ -61,9 +98,11 @@ export default function ExpenseForm() {
                 <label
                     htmlFor="date"
                     className="text-xl"
-                >Fecha Gasro:</label>
+                >Fecha Gasto:</label>
                 <DatePicker
-                    className=" bg-slate-100 p-2 border-0" />
+                    className=" bg-slate-100 p-2 border-0"
+                    value={expense.date}
+                    onChange={handleChangeDate} />
             </div>
 
             <input
