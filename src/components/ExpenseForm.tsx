@@ -4,6 +4,7 @@ import DatePicker from "react-date-picker";
 import 'react-calendar/dist/Calendar.css'
 import 'react-date-picker/dist/DatePicker.css'
 import { DraftExpense, Value } from "../types";
+import ErrorMessage from "./ErrorMessage";
 
 export default function ExpenseForm() {
     const [expense, setExpense] = useState<DraftExpense>({
@@ -31,9 +32,7 @@ export default function ExpenseForm() {
             setError('Todod los campos son obligatorios')
             return
         }
-
-        console.log('error');
-
+        setError('')
     }
 
     return (
@@ -41,6 +40,8 @@ export default function ExpenseForm() {
             <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2">
                 Nuevo Gasto
             </legend>
+
+            {error && <ErrorMessage>{error}</ErrorMessage>}
 
             <div className="flex flex-col gap-2">
                 <label
