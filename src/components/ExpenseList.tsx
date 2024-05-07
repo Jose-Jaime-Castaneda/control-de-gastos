@@ -11,14 +11,12 @@ export default function ExpenseList() {
             {isEmpty ? <p className="text-gray-600 text-2xl font-bold">No hay gastos aún</p> : (
                 <>
                     <p className="text-gray-600 text-2xl font-bold my-5">Listado de gastos</p>
-                    {state.expenses.map(expense => {
-                        return (
-                            <ExpenseDetail
-                                key={expense.id}
-                                expense={expense}
-                            />
-                        )
-                    })}
+                    {state.expenses.map(expense => (
+                        <ExpenseDetail
+                            key={expense.id}
+                            expense={expense}
+                        />
+                    ))}
                 </>
             )}
         </div>
