@@ -8,12 +8,14 @@ import ErrorMessage from "./ErrorMessage";
 import { useBudget } from "../hooks/useBudget";
 
 export default function ExpenseForm() {
-    const [expense, setExpense] = useState<DraftExpense>({
+    const INITIAL_STATE = {
         amount: 0,
         expenseName: '',
         category: '',
         date: new Date()
-    })
+    }
+
+    const [expense, setExpense] = useState<DraftExpense>(INITIAL_STATE)
     const [error, setError] = useState('')
     const { dispatch } = useBudget()
 
@@ -36,6 +38,7 @@ export default function ExpenseForm() {
         }
         setError('')
         dispatch({ type: 'add-expense', payload: { expense: expense } })
+        setExpense(INITIAL_STATE)
     }
 
     return (
