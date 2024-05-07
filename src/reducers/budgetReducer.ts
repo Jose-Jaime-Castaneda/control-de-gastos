@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { DraftExpense, Expense } from "../types";
 
 export type BudgetActions =
@@ -44,9 +45,11 @@ export const budgetReducer = (
   }
 
   if (action.type === "add-expense") {
+    const expense = { ...action.payload.expense, id: uuidv4() };
+
     return {
       ...state,
-      expenses: [...state.expenses, action.payload.expense],
+      expenses: [...state.expenses, expense],
     };
   }
 
