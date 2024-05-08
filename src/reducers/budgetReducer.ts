@@ -69,6 +69,7 @@ export const budgetReducer = (
     return {
       ...state,
       editingId: action.payload.id,
+      modal: true,
     };
   }
 
