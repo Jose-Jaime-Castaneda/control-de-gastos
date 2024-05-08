@@ -95,6 +95,7 @@ export default function ExpenseForm() {
                     id="category"
                     className="bg-slate-100 p-2"
                     name="category"
+                    value={expense.category}
                     onChange={handleChange}>
                     <option value="">-- Sleccione una categoria</option>
                     {categories.map(category => (
