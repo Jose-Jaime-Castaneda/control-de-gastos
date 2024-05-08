@@ -122,7 +122,7 @@ export default function ExpenseForm() {
             <input
                 type="submit"
                 className="bg-blue-600 cursor-pointer w-full p-2 text-white uppercase font-bold rounded-lg"
-                value={'Registrat Gasto'}
+                value={'Registrar Gasto'}
             />
         </form>
     )
