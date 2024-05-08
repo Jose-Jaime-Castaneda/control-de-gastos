@@ -56,13 +56,9 @@ export const budgetReducer = (
   }
 
   if (action.type === "remove-expense") {
-    const updatedExpense = state.expenses.filter(
-      (exp) => exp.id !== action.payload.id
-    );
-
     return {
       ...state,
-      expenses: [...state.expenses, updatedExpense],
+      expenses: state.expenses.filter((exp) => exp.id !== action.payload.id),
     };
   }
 
