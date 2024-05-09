@@ -54,12 +54,12 @@ export default function ExpenseForm() {
         setExpense(INITIAL_STATE)
     }
 
-    const isNew = useMemo(() => state.editingId.length === 0 ,[state.editingId])
+    const isNew = useMemo(() => state.editingId.length === 0, [state.editingId])
 
     return (
         <form className="space-y-5" onSubmit={hanldeSubmit}>
             <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2">
-                { isNew ? 'Nuevo Gasto' : 'Editar Gasto'}
+                {isNew ? 'Nuevo Gasto' : 'Guardar Cambios'}
             </legend>
 
             {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -131,7 +131,7 @@ export default function ExpenseForm() {
             <input
                 type="submit"
                 className="bg-blue-600 cursor-pointer w-full p-2 text-white uppercase font-bold rounded-lg"
-                value={'Registrar Gasto'}
+                value={isNew ? 'Nuevo Gasto' : 'Guardar Cambios'}
             />
         </form>
     )
