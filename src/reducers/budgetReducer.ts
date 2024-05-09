@@ -46,6 +46,7 @@ export const budgetReducer = (
     return {
       ...state,
       modal: false,
+      editingId: "",
     };
   }
 
@@ -80,6 +81,8 @@ export const budgetReducer = (
       expenses: state.expenses.map((exp) =>
         exp.id === action.payload.expense.id ? action.payload.expense : exp
       ),
+      modal: false,
+      editingId: "",
     };
   }
 
