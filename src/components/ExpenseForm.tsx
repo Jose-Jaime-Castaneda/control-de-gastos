@@ -17,12 +17,14 @@ export default function ExpenseForm() {
 
     const [expense, setExpense] = useState<DraftExpense>(INITIAL_STATE)
     const [error, setError] = useState('')
+    const [previousAmount, setPreviousAmount] = useState(0)
     const { dispatch, state, remainingBudget } = useBudget()
 
     useEffect(() => {
         if (state.editingId) {
             const editingExpense = state.expenses.filter(current => current.id === state.editingId)[0]
             setExpense(editingExpense);
+            setPreviousAmount(editingExpense.amount)
         }
     }, [state.editingId])
 
@@ -44,7 +46,7 @@ export default function ExpenseForm() {
             return
         }
 
-        if (expense.amount > remainingBudget) {
+        if ((expense.amount - previousAmount) > remainingBudget) {
             setError('Presupuesto rebasado')
             return
         }
