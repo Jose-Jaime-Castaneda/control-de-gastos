@@ -8,7 +8,7 @@ export default function FilterByCategory() {
                     <select name="" id="">
                         <option value={''}>-- Todas las cetegorias</option>
                         {categories.map(cat => (
-                            <option id={cat.id} value={cat.name}>{cat.name}</option>
+                            <option key={cat.id} value={cat.name}>{cat.name}</option>
                         ))}
                     </select>
                 </div>
