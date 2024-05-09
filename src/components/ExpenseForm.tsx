@@ -17,7 +17,7 @@ export default function ExpenseForm() {
 
     const [expense, setExpense] = useState<DraftExpense>(INITIAL_STATE)
     const [error, setError] = useState('')
-    const { dispatch, state } = useBudget()
+    const { dispatch, state, remainingBudget } = useBudget()
 
     useEffect(() => {
         if (state.editingId) {
@@ -41,6 +41,11 @@ export default function ExpenseForm() {
 
         if (Object.values(expense).includes('')) {
             setError('Todos los campos son obligatorios')
+            return
+        }
+
+        if (expense.amount > remainingBudget) {
+            setError('Presupuesto rebasado')
             return
         }
 
