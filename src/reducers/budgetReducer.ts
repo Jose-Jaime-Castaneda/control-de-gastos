@@ -104,6 +104,7 @@ export const budgetReducer = (
     localStorage.removeItem("budget");
     localStorage.removeItem("expenses");
     return {
+      ...state,
       budget: initialBudget(),
       modal: false,
       expenses: initialExpenses(),
