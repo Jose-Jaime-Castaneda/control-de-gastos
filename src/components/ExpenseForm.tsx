@@ -40,11 +40,17 @@ export default function ExpenseForm() {
         e.preventDefault()
 
         if (Object.values(expense).includes('')) {
-            setError('Todod los campos son obligatorios')
+            setError('Todos los campos son obligatorios')
             return
         }
+
+        if (state.editingId) {
+            dispatch({ type: 'update-expense', payload: { expense: { id: state.editingId, ...expense } } })
+        } else {
+            dispatch({ type: 'add-expense', payload: { expense: expense } })
+        }
+
         setError('')
-        dispatch({ type: 'add-expense', payload: { expense: expense } })
         setExpense(INITIAL_STATE)
     }
 
