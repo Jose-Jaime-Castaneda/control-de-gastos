@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { categories } from "../data/categories";
 import DatePicker from "react-date-picker";
 import 'react-calendar/dist/Calendar.css'
@@ -54,10 +54,12 @@ export default function ExpenseForm() {
         setExpense(INITIAL_STATE)
     }
 
+    const isNew = useMemo(() => state.editingId.length === 0 ,[state.editingId])
+
     return (
         <form className="space-y-5" onSubmit={hanldeSubmit}>
             <legend className="uppercase text-center text-2xl font-black border-b-4 border-blue-500 py-2">
-                Nuevo Gasto
+                { isNew ? 'Nuevo Gasto' : 'Editar Gasto'}
             </legend>
 
             {error && <ErrorMessage>{error}</ErrorMessage>}
